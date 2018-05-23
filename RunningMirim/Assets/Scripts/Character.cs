@@ -94,7 +94,7 @@ public class Character : MonoBehaviour {
             }
             else if (col.transform.tag.Equals("Jelly"))
             {
-                GC.jellyScore += 100;
+                GC.jellyScore += 300;
                 Destroy(col.gameObject);
             }
         }

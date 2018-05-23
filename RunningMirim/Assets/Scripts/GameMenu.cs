@@ -7,13 +7,14 @@ public class GameMenu : MonoBehaviour {
 
     public void PlayGame(string playGameLevel)
     {
-        Scene scene = SceneManager.GetActiveScene();
+        //Scene scene = SceneManager.GetActiveScene();
 
-        int curScene = scene.buildIndex;
+        //int curScene = scene.buildIndex;
 
-        int playScene = curScene + 1;
+        //int playScene = curScene + 1;
 
-        SceneManager.LoadScene(playScene);
+        //SceneManager.LoadScene(playScene);
+        SceneManager.LoadScene(playGameLevel);
     }
     public void ExplainGame(string playGameLevel)
     {
