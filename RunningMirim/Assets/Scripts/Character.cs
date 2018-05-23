@@ -25,11 +25,15 @@ public class Character : MonoBehaviour {
     //게임컨트롤러 접근 위한 선언
     public GameController GC;
 
+    //trigger 제어
+    public static bool isTriggerOn;
+
     // Use this for initialization
     void Start () {
         myAnimator = GetComponent<Animator>();
         grounded = true;
         powerTime = 7.0f;
+        isTriggerOn = true;
     }
 	
 	// Update is called once per frame
@@ -75,21 +79,25 @@ public class Character : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.transform.tag.Equals("powerup"))
+        if (isTriggerOn==true)
         {
-            Destroy(col.gameObject);
-            power = true;
+            if (col.transform.tag.Equals("powerup"))
+            {
+                Destroy(col.gameObject);
+                power = true;
+            }
+            //power모드일때는 장애물무시
+            else if (col.transform.tag.Equals("DamageBox") && power == false)
+            {
+                //게임오버
+                GC.GameOver();
+            }
+            else if (col.transform.tag.Equals("Jelly"))
+            {
+                GC.jellyScore += 100;
+                Destroy(col.gameObject);
+            }
         }
-        //power모드일때는 장애물무시
-        else if (col.transform.tag.Equals("DamageBox") && power==false)
-        {
-            //게임오버
-            GC.GameOver();
-        }
-        else if (col.transform.tag.Equals("Jelly"))
-        {
-            GC.jellyScore++;
-            Destroy(col.gameObject);
-        }
+        
     }
 }

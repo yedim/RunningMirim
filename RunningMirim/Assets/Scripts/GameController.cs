@@ -32,11 +32,12 @@ public class GameController : MonoBehaviour {
     public GameObject DeathMenu;
     public Text DeathScoreText;
 
+
     // Use this for initialization
     void Start () {
         backgroundNum = 1;
         isGamePlaying = true;
-        Time.timeScale = 1; 
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -69,7 +70,6 @@ public class GameController : MonoBehaviour {
                         RandomIndex = Random.Range(11, 15);
                         break;
                 }
-
                 Instantiate(box[RandomIndex]);
             }
             //파워아이템생성
@@ -93,13 +93,22 @@ public class GameController : MonoBehaviour {
             }
             jellyScoreText.text = jellyScore.ToString();   
         }
+
+        //time 0보다 작으면 게임오버
+        if(HPManager.time<=0)
+        {
+            GameOver();
+        }
     }
 
     public void GameOver()
     {
         DeathMenu.SetActive(true);
         DeathScoreText.text = jellyScoreText.text;
-        Time.timeScale = 0;
+        Time.timeScale = 0f;
         isGamePlaying = false;
+        box.Clear();       
     }
+
+
 }

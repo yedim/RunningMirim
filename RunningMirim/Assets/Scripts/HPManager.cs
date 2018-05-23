@@ -8,7 +8,7 @@ public class HPManager : MonoBehaviour {
     //HP
     public Image fillImage;
     public float timeAmt = 100f;
-    public float time;
+    public static float time;
     public bool updateTimer = true;
 
 
@@ -23,6 +23,10 @@ public class HPManager : MonoBehaviour {
         {
             time -= Time.deltaTime;
             fillImage.fillAmount = time / timeAmt;
+        }
+        else
+        {
+            fillImage.fillAmount = 0;
         }
     }
     public void ResetHP()
