@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour {
 
     public List<GameObject> box;//장애물종류
+    public List<GameObject> jellyLetter;//젤리글자 종류
+
     public int backgroundNum; //배경(현재 맵)
 
     public GameObject powerItem;//파워업아이템
@@ -18,6 +20,8 @@ public class GameController : MonoBehaviour {
     public int powerDistanceBetween;
     //선생님
     public int tchDistanceBetween;
+    //젤리글자
+    public int jellyLetterDistanceBetween;
 
 	//점수
     public Text jellyScoreText;
@@ -32,6 +36,8 @@ public class GameController : MonoBehaviour {
     public GameObject DeathMenu;
     public Text DeathScoreText;
 
+    //helloworld 메뉴
+    public List<Image> helloWorldLetter;//helloWorld위에있는 letter종류
 
     // Use this for initialization
     void Start () {
@@ -48,6 +54,8 @@ public class GameController : MonoBehaviour {
             distanceBetween++;
             powerDistanceBetween++;
             tchDistanceBetween++;
+            jellyLetterDistanceBetween++;
+
 
             //장애물 생성(10분의 1확률 && 이전꺼랑 150이상 차이)
             if ((int)Random.Range(0f, 100f) < 10 && distanceBetween > 150)
@@ -84,8 +92,13 @@ public class GameController : MonoBehaviour {
                 tchDistanceBetween = 0;
                 Instantiate(teacher[Random.Range(0, 1)]);
             }
+            //젤리글자 생성
+            if ((int)Random.Range(0f, 100f) < 10 && jellyLetterDistanceBetween > 100)
+            {
+                jellyLetterDistanceBetween = 0;
+                Instantiate(jellyLetter[Random.Range(0,11)]);
+            }
 
-            
             score++;//프레임 증가
             if (score % 50 == 0)//젤리 생성
             {

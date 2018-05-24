@@ -7,6 +7,17 @@ TagManager:
   - powerup
   - DamageBox
   - Jelly
+  - H
+  - E
+  - L_1
+  - L_2
+  - L_3
+  - JellyLetter
+  - O_1
+  - O_2
+  - R
+  - W
+  - D
   layers:
   - Default
   - TransparentFX
