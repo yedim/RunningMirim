@@ -33,7 +33,7 @@ public class Teacher : MonoBehaviour {
                 state = "teacher_angry";//인사안하고 지나쳤을때(화난표정)
                 isGreet = true;
                 //점수깎이기
-                HPManager.time -= 70;
+                HPManager.time -= 30;
 
             }
         }

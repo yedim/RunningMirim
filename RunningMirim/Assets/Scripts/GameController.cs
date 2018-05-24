@@ -120,8 +120,10 @@ public class GameController : MonoBehaviour {
         DeathScoreText.text = jellyScoreText.text;
         Time.timeScale = 0f;
         isGamePlaying = false;
+        Ranking.InsertRank(jellyScore);
         box.Clear();       
     }
 
+   
 
 }

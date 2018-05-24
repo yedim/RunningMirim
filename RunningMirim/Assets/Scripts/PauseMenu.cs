@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour {
     
-    //public string mainMenuLevel;
     public GameObject pauseMenu;
     public GameController GC;
 
@@ -32,7 +31,6 @@ public class PauseMenu : MonoBehaviour {
         pauseMenu.SetActive(false);
         GC.isGamePlaying = true;
         //리셋
-        //GC.jellyScore = 0;
         Character.isTriggerOn = true;
         SceneManager.LoadScene("InGame");
     }
@@ -40,7 +38,6 @@ public class PauseMenu : MonoBehaviour {
     public void QuitToMain()
     {
         Time.timeScale = 1f;
-        Application.Quit();
         Character.isTriggerOn = true;
         SceneManager.LoadScene("RankMenu");
     }
