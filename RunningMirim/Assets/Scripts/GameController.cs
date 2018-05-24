@@ -39,16 +39,76 @@ public class GameController : MonoBehaviour {
     //helloworld 메뉴
     public List<Image> helloWorldLetter;//helloWorld위에있는 letter종류
 
+    //인사안했을때 화면 붉게
+    public GameObject DangerBox;
+    public static bool isDanger;
+    public int danCnt = 0;
+
+    //background
+    public GameObject bg1;
+    public GameObject bg2;
+    public int nowBack = 2; //현재 옮겨야할 배경이 bg1인지 bg2인지
+    public int BackCnt = 1;
+
     // Use this for initialization
     void Start () {
         backgroundNum = 1;
         isGamePlaying = true;
         Time.timeScale = 1;
+        isDanger = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        //background
+        if (bg1.transform.position.x < 3.945f && nowBack == 2)
+        {
+            if (BackCnt % 10 == 0) backgroundNum++;
+            BackCnt++;
+            switch (backgroundNum)
+            {
+                case 1://복도
+                    bg2.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("hallway") as Sprite;
+                    break;
+                case 2://계단
+                    bg2.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("step") as Sprite;
+                    break;
+                case 3://밖
+                    bg2.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("outside") as Sprite;
+                    break;
+                case 4://급식실
+                    bg2.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("schoolCafeteria") as Sprite;
+                    break;
+            }
+            //배경 위치옮기고 nowBack은 2로
+            bg2.transform.position = new Vector3(27.74f, -0.025f, 2f);
+            nowBack = 1;
+        }
+        if (bg2.transform.position.x < 3.945f && nowBack == 1)
+        {
+            if (BackCnt % 3 == 0) backgroundNum++;
+            BackCnt++;
+            switch (backgroundNum)
+            {
+                case 1://복도
+                    bg1.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("hallway") as Sprite;
+                    break;
+                case 2://계단
+                    bg1.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("step") as Sprite;
+                    break;
+                case 3://밖
+                    bg1.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("outside") as Sprite;
+                    break;
+                case 4://급식실
+                    bg1.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("schoolCafeteria") as Sprite;
+                    break;
+            }
+            bg1.transform.position = new Vector3(27.74f, -0.025f, 2f);
+            nowBack = 2;
+        }
+
         if (isGamePlaying==true)
         {
             distanceBetween++;
@@ -96,7 +156,7 @@ public class GameController : MonoBehaviour {
             if ((int)Random.Range(0f, 100f) < 10 && jellyLetterDistanceBetween > 100)
             {
                 jellyLetterDistanceBetween = 0;
-                Instantiate(jellyLetter[Random.Range(0,11)]);
+                Instantiate(jellyLetter[Random.Range(0, 10)]);
             }
 
             score++;//프레임 증가
@@ -104,8 +164,23 @@ public class GameController : MonoBehaviour {
             {
                 Instantiate(JellyPrefab, JellyMakePosition.transform.position, Quaternion.identity);
             }
-            jellyScoreText.text = jellyScore.ToString();   
+            jellyScoreText.text = jellyScore.ToString();
+
+            //인사안했을때 붉은상자
+            if (isDanger)
+            {
+                danCnt++;
+                DangerBox.SetActive(true);
+                if (danCnt > 20)
+                {
+                    DangerBox.SetActive(false);
+
+                    isDanger = false;
+                    danCnt = 0;
+                }
+            }
         }
+       
 
         //time 0보다 작으면 게임오버
         if(HPManager.time<=0)

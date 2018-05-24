@@ -38,7 +38,9 @@ public class Character : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        grounded = Physics2D.IsTouchingLayers(GetComponent<Collider2D>(), whatIsGround);
+        //점프하면서 인사했을때 인사되게
+        if (!greet) grounded = Physics2D.IsTouchingLayers(GetComponent<Collider2D>(), whatIsGround);
+        else grounded = true;
 
         //땅에 닿아있으면 점프 카운트 초기화
         if (grounded) jumpCnt = 0;
@@ -69,7 +71,7 @@ public class Character : MonoBehaviour {
 
     public void GreetBtnDown()//인사버튼눌렀을때
     {
-        if(grounded) greet = true;
+        greet = true;
     }
 
     public void GreetBtnUp()//인사버튼안누를때
@@ -94,7 +96,7 @@ public class Character : MonoBehaviour {
             }
             else if (col.transform.tag.Equals("Jelly"))
             {
-                GC.jellyScore += 300;
+                GC.jellyScore += 500;
                 Destroy(col.gameObject);
             }
             else if (col.transform.tag.Equals("H"))   { Destroy(col.gameObject); GC.helloWorldLetter[0].gameObject.SetActive(true); }
