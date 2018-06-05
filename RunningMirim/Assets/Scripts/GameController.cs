@@ -45,7 +45,7 @@ public class GameController : MonoBehaviour {
     public int danCnt = 0;
 
     //background
-    public GameObject bg1;
+    public GameObject bg1; 
     public GameObject bg2;
     public int nowBack = 2; //현재 옮겨야할 배경이 bg1인지 bg2인지
     public int BackCnt = 1;
@@ -55,8 +55,7 @@ public class GameController : MonoBehaviour {
         backgroundNum = 1;
         isGamePlaying = true;
         Time.timeScale = 1;
-        isDanger = false;
-
+        isDanger = false; 
     }
 
     // Update is called once per frame
@@ -141,7 +140,7 @@ public class GameController : MonoBehaviour {
                 Instantiate(box[RandomIndex]);
             }
             //파워아이템생성
-            if ((int)Random.Range(0f, 100f) < 10 && powerDistanceBetween > 1000)
+            if ((int)Random.Range(0f, 100f) < 10 && powerDistanceBetween > 700)
             {
                 powerDistanceBetween = 0;
                 Instantiate(powerItem);

@@ -32,10 +32,12 @@ public class Teacher : MonoBehaviour {
             {
                 state = "teacher_angry";//인사안하고 지나쳤을때(화난표정)
                 isGreet = true;
-                GameController.isDanger = true;
-                //점수깎이기
-                HPManager.time -= 20;
-
+                if(!Character.power)//파워 상태에서는 인사안해도 상과없게
+                {
+                    GameController.isDanger = true;
+                    HPManager.time -= 20;
+                }
+               
             }
         }
 

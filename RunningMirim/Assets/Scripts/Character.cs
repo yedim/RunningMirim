@@ -25,6 +25,9 @@ public class Character : MonoBehaviour {
     //게임컨트롤러 접근 위한 선언
     public GameController GC;
 
+    //게임컨트롤러 접근 위한 선언
+    public MoveObject MO;
+    
     //trigger 제어
     public static bool isTriggerOn;
 
@@ -51,6 +54,7 @@ public class Character : MonoBehaviour {
             if (powerTime < 0){
                 power = false;
                 powerTime = 7.0f;
+
             }
         }
 
@@ -91,8 +95,9 @@ public class Character : MonoBehaviour {
             //power모드일때는 장애물무시
             else if (col.transform.tag.Equals("DamageBox") && power == false)
             {
+                HPManager.time -= 20;
                 //게임오버
-                GC.GameOver();
+                //GC.GameOver();
             }
             else if (col.transform.tag.Equals("Jelly"))
             {
