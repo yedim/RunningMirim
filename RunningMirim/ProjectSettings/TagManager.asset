@@ -18,6 +18,7 @@ TagManager:
   - R
   - W
   - D
+  - BigJelly
   layers:
   - Default
   - TransparentFX

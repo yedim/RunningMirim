@@ -21,7 +21,7 @@ public class HPManager : MonoBehaviour {
     {
         if (time > 0 && updateTimer == true)
         {
-            time -= Time.deltaTime;
+            if(!Character.bonus)time -= Time.deltaTime;
             fillImage.fillAmount = time / timeAmt;
         }
         else

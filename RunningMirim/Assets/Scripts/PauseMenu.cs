@@ -7,13 +7,12 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour {
     
     public GameObject pauseMenu;
-    public GameController GC;
 
     public void PauseGame()
     {
         Time.timeScale = 0f;
         pauseMenu.SetActive(true);
-        GC.isGamePlaying = false;
+        GameController.isGamePlaying = false;
         Character.isTriggerOn = false;//충돌처리 안되도록
     }
 
@@ -21,7 +20,7 @@ public class PauseMenu : MonoBehaviour {
     {
         Time.timeScale = 1f;
         pauseMenu.SetActive(false);
-        GC.isGamePlaying = true;
+        GameController.isGamePlaying = true;
         Character.isTriggerOn = true;
     }
 
@@ -29,7 +28,7 @@ public class PauseMenu : MonoBehaviour {
     {
         Time.timeScale = 1f;
         pauseMenu.SetActive(false);
-        GC.isGamePlaying = true;
+        GameController.isGamePlaying = true;
         //리셋
         Character.isTriggerOn = true;
         SceneManager.LoadScene("InGame");
