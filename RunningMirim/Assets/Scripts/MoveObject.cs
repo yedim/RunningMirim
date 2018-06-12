@@ -20,9 +20,13 @@ public class MoveObject : MonoBehaviour {
 	void Update () {
         if (!Character.bonus||isBonusItem)//보너스 일때 아래 세상은 다 멈추게...
         {
-            if (Character.power) transform.Translate(Vector3.left * (speed * 2.0f));
-            else if (!GameController.isGamePlaying) { }
-            else transform.Translate(Vector3.left * speed);
+            if (!GameController.isGamePlaying) { }
+            else
+            {
+                if (Character.power) transform.Translate(Vector3.left * (speed * 2.0f));
+                else transform.Translate(Vector3.left * speed);
+            } 
+                
         }
     }
 }

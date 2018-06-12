@@ -19,6 +19,7 @@ TagManager:
   - W
   - D
   - BigJelly
+  - love
   layers:
   - Default
   - TransparentFX

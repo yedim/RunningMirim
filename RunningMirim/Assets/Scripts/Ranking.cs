@@ -10,14 +10,12 @@ public class Ranking : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () { //한번만 부르면 되기 때문에 Start로 불러옴
-		for(int i=0; i<5;i++)
-        {
-            Rank.text = "1위 " + PlayerPrefs.GetInt("0") + "\n\n"+
-                "2위 " + PlayerPrefs.GetInt("1") + "\n\n" +
-                "3위 " + PlayerPrefs.GetInt("2") + "\n\n" +
-                "4위 " + PlayerPrefs.GetInt("3") + "\n\n" +
-                "5위 " + PlayerPrefs.GetInt("4");
-        }
+
+        Rank.text = "1위 " + PlayerPrefs.GetInt("0") + "\n\n" +
+               "2위 " + PlayerPrefs.GetInt("1") + "\n\n" +
+               "3위 " + PlayerPrefs.GetInt("2") + "\n\n" +
+               "4위 " + PlayerPrefs.GetInt("3") + "\n\n" +
+               "5위 " + PlayerPrefs.GetInt("4");
     }
 
     public static void InsertRank(int jellyScore)
@@ -35,8 +33,7 @@ public class Ranking : MonoBehaviour {
                 PlayerPrefs.SetInt(i.ToString(), jellyScore);
                 break;
             }
-
-
+          
         }
     }
 	

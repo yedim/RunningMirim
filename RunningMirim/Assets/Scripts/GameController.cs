@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour {
     public int backgroundNum; //배경(현재 맵)
 
     public GameObject powerItem;//파워업아이템
+    public GameObject loveItem;//생명업아이템
     public GameObject JellyPrefab, JellyMakePosition;//아마스빈 젤리
 
     //장애물사이(최소 150 이상(거리단위는 아니지만...))
@@ -28,12 +29,16 @@ public class GameController : MonoBehaviour {
     public int cloudEistanceBetween;
     //보너스 젤리
     public int BonusJDistanceBetween;
+    //아이템사이
+    public int loveDistanceBetween;
+
 
     //랜덤 거리
     public int distanceranBetween;
     public int powerDistanceranBetween;
     public int tchDistanceranBetween;
     public int jellyLetterranBetween;
+    public int loveDistanceranBetween;
 
     //점수
     public Text jellyScoreText;
@@ -70,6 +75,7 @@ public class GameController : MonoBehaviour {
 
         distanceranBetween = (int)Random.Range(100f, 200f);
         powerDistanceranBetween = (int)Random.Range(1000f, 1500f);
+        loveDistanceranBetween = (int)Random.Range(1200f, 1700f);
         tchDistanceranBetween = (int)Random.Range(450f, 700f);
         jellyLetterranBetween = (int)Random.Range(100f, 200f);
     }
@@ -86,6 +92,7 @@ public class GameController : MonoBehaviour {
             jellyLetterDistanceBetween--;
             cloudEistanceBetween++;
             BonusJDistanceBetween++;
+            loveDistanceBetween--;
             //구름
             if (cloudEistanceBetween > 100)
             {
@@ -119,7 +126,7 @@ public class GameController : MonoBehaviour {
                 case 3://밖
                     bg2.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("outside") as Sprite;
                     break;
-                case 4://급식실
+                default://급식실
                     bg2.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("schoolCafeteria") as Sprite;
                     break;
             }
@@ -142,7 +149,7 @@ public class GameController : MonoBehaviour {
                 case 3://밖
                     bg1.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("outside") as Sprite;
                     break;
-                case 4://급식실
+               default://급식실
                     bg1.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("schoolCafeteria") as Sprite;
                     break;
             }
@@ -154,6 +161,7 @@ public class GameController : MonoBehaviour {
         {
             distanceBetween++;
             powerDistanceBetween++;
+            loveDistanceBetween++;
             tchDistanceBetween++;
             jellyLetterDistanceBetween++;
 
@@ -176,7 +184,7 @@ public class GameController : MonoBehaviour {
                     case 3://밖
                         RandomIndex = Random.Range(7, 11);
                         break;
-                    case 4://급식실
+                    default://급식실
                         RandomIndex = Random.Range(11, 15);
                         break;
                 }
@@ -188,6 +196,13 @@ public class GameController : MonoBehaviour {
                 powerDistanceBetween = 0;
                 powerDistanceranBetween = (int)Random.Range(1000f, 1500f);
                 Instantiate(powerItem);
+            }
+            //하트아이템생성
+            if (loveDistanceBetween > loveDistanceranBetween)
+            {
+                loveDistanceBetween = 0;
+                loveDistanceranBetween = (int)Random.Range(1200f, 1700f);
+                Instantiate(loveItem);
             }
             //선생님생성
             if (tchDistanceBetween > tchDistanceranBetween)
@@ -228,7 +243,11 @@ public class GameController : MonoBehaviour {
         //time 0보다 작으면 게임오버
         if(HPManager.time<=0)
         {
-            GameOver();
+            if(isGamePlaying)
+            {
+                isGamePlaying = false;
+                GameOver();
+            }
         }
     }
 
@@ -237,7 +256,6 @@ public class GameController : MonoBehaviour {
         DeathMenu.SetActive(true);
         DeathScoreText.text = jellyScoreText.text;
         Time.timeScale = 0f;
-        isGamePlaying = false;
         Ranking.InsertRank(jellyScore);
         box.Clear();       
     }

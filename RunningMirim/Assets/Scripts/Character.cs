@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+
 
 public class Character : MonoBehaviour {
     
@@ -15,6 +17,7 @@ public class Character : MonoBehaviour {
 
     //인사
     public static bool greet;
+    public float greetTime;
 
     //파워(체육복)
     public static bool power;
@@ -41,6 +44,7 @@ public class Character : MonoBehaviour {
         realBonusTime = 10.0f;
         isTriggerOn = true;
         jumpCnt = 0;
+        greetTime = 0f;
     }
 	
 	// Update is called once per frame
@@ -111,6 +115,16 @@ public class Character : MonoBehaviour {
         myAnimator.SetBool("Greet", greet);
         myAnimator.SetBool("Power", power);
         myAnimator.SetBool("Bonus", bonus);
+
+        if (greet)
+        {
+            greetTime += Time.deltaTime;
+        }
+        if(greetTime>1.0f)
+        {
+            greetTime = 0f;
+            greet = false;
+        }
     }
 
     public void JumpBtn()
@@ -158,6 +172,15 @@ public class Character : MonoBehaviour {
             {
                 GC.jellyScore += 700;
                 Destroy(col.gameObject);
+            }
+            else if(col.transform.tag.Equals("love"))
+            {
+                Destroy(col.gameObject);
+                HPManager.time += 20;
+                if(HPManager.time>100f)
+                {
+                    HPManager.time = 100f;
+                }
             }
             else if (col.transform.tag.Equals("H")) { Destroy(col.gameObject); GC.helloWorldLetter[0].gameObject.SetActive(true); GC.helloJelly[0] = true; }
             else if (col.transform.tag.Equals("E")) { Destroy(col.gameObject); GC.helloWorldLetter[1].gameObject.SetActive(true); GC.helloJelly[1] = true; }
