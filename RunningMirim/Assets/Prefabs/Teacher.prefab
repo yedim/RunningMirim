@@ -55,6 +55,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 
   isGreet: 0
+  Character: {fileID: 0}
 --- !u!114 &114799126012420726
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -67,7 +68,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.1
-  isBack: 0
 --- !u!212 &212041608225180106
 SpriteRenderer:
   m_ObjectHideFlags: 1

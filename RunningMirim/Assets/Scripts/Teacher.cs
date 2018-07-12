@@ -24,6 +24,7 @@ public class Teacher : MonoBehaviour {
             {
                 state = "teacher" + index + "_happy";
                 isGreet = true;
+                GameObject.Find("GreetSound").GetComponent<AudioSource>().Play();
             }
             else
             {
@@ -38,6 +39,7 @@ public class Teacher : MonoBehaviour {
                     GameController.isDanger = true;
                     //점수깎이기
                     HPManager.time -= 20;
+                    GameObject.Find("NotGreetSound").GetComponent<AudioSource>().Play();
                 }
 
             }

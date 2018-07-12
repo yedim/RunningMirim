@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour
+{
 
     public List<GameObject> box;//장애물종류
     public List<GameObject> jellyLetter;//젤리글자 종류
@@ -43,7 +44,7 @@ public class GameController : MonoBehaviour {
     //점수
     public Text jellyScoreText;
     int score = 0;
-	public int jellyScore=0;
+    public int jellyScore = 0;
     public static bool isGamePlaying;
 
 
@@ -53,7 +54,7 @@ public class GameController : MonoBehaviour {
 
     //helloworld 메뉴
     public List<Image> helloWorldLetter;//helloWorld위에있는 letter종류
-    public bool[] helloJelly=new bool[9];
+    public bool[] helloJelly = new bool[9];
 
     //인사안했을때 화면 붉게
     public GameObject DangerBox;
@@ -67,7 +68,8 @@ public class GameController : MonoBehaviour {
     public int BackCnt = 1;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         backgroundNum = 1;
         isGamePlaying = true;
         Time.timeScale = 1;
@@ -99,7 +101,7 @@ public class GameController : MonoBehaviour {
                 cloudEistanceBetween = 0;
                 Instantiate(cloud[Random.Range(0, 4)]);
             }
-            if (BonusJDistanceBetween>30)
+            if (BonusJDistanceBetween > 30)
             {
                 BonusJDistanceBetween = 0;
                 //작은 젤리 큰 젤리 3:1 비율 (작은젤리가 더 많이 나오게)
@@ -149,7 +151,7 @@ public class GameController : MonoBehaviour {
                 case 3://밖
                     bg1.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("outside") as Sprite;
                     break;
-               default://급식실
+                default://급식실
                     bg1.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("schoolCafeteria") as Sprite;
                     break;
             }
@@ -157,7 +159,7 @@ public class GameController : MonoBehaviour {
             nowBack = 2;
         }
 
-        if (isGamePlaying==true)
+        if (isGamePlaying == true)
         {
             distanceBetween++;
             powerDistanceBetween++;
@@ -241,9 +243,9 @@ public class GameController : MonoBehaviour {
         }
 
         //time 0보다 작으면 게임오버
-        if(HPManager.time<=0)
+        if (HPManager.time <= 0)
         {
-            if(isGamePlaying)
+            if (isGamePlaying)
             {
                 isGamePlaying = false;
                 GameOver();
@@ -257,6 +259,6 @@ public class GameController : MonoBehaviour {
         DeathScoreText.text = jellyScoreText.text;
         Time.timeScale = 0f;
         Ranking.InsertRank(jellyScore);
-        box.Clear();       
+        box.Clear();
     }
 }

@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Ranking : MonoBehaviour {
+public class Ranking : MonoBehaviour
+{
 
-	//랭킹 텍스트를 가져올 변수
+    //랭킹 텍스트를 가져올 변수
     public Text Rank;
 
-	// Use this for initialization
-	void Start () { //한번만 부르면 되기 때문에 Start로 불러옴
+    // Use this for initialization
+    void Start()
+    { //한번만 부르면 되기 때문에 Start로 불러옴
 
         Rank.text = "1위 " + PlayerPrefs.GetInt("0") + "\n\n" +
                "2위 " + PlayerPrefs.GetInt("1") + "\n\n" +
@@ -33,12 +35,13 @@ public class Ranking : MonoBehaviour {
                 PlayerPrefs.SetInt(i.ToString(), jellyScore);
                 break;
             }
-          
+
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 }
