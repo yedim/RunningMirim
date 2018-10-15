@@ -20,6 +20,7 @@ TagManager:
   - D
   - BigJelly
   - love
+  - coin
   layers:
   - Default
   - TransparentFX

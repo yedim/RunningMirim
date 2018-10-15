@@ -11,12 +11,13 @@ public class GameController : MonoBehaviour
     public List<GameObject> cloud;//보너스 배경구름
     public List<GameObject> teacher;//선생님
     public List<GameObject> bonusJelly;//보너스 젤리
-
+    public GameObject bonusCoin;//보너스 코인
     public int backgroundNum; //배경(현재 맵)
 
     public GameObject powerItem;//파워업아이템
     public GameObject loveItem;//생명업아이템
     public GameObject JellyPrefab, JellyMakePosition;//아마스빈 젤리
+    public GameObject coinObject;
 
     //장애물사이(최소 150 이상(거리단위는 아니지만...))
     public int distanceBetween;
@@ -32,6 +33,8 @@ public class GameController : MonoBehaviour
     public int BonusJDistanceBetween;
     //아이템사이
     public int loveDistanceBetween;
+    //코인사이
+    public int coinDistanceBetween;
 
 
     //랜덤 거리
@@ -40,6 +43,8 @@ public class GameController : MonoBehaviour
     public int tchDistanceranBetween;
     public int jellyLetterranBetween;
     public int loveDistanceranBetween;
+    public int coinDistanceranBetween;
+
 
     //점수
     public Text jellyScoreText;
@@ -47,7 +52,10 @@ public class GameController : MonoBehaviour
     public int jellyScore = 0;
     public static bool isGamePlaying;
 
-
+    //코인
+    public Text coinScoreText;
+    public int coinScore = 0;
+    
     //죽었을 때 나오는 메뉴
     public GameObject DeathMenu;
     public Text DeathScoreText;
@@ -80,6 +88,9 @@ public class GameController : MonoBehaviour
         loveDistanceranBetween = (int)Random.Range(1200f, 1700f);
         tchDistanceranBetween = (int)Random.Range(450f, 700f);
         jellyLetterranBetween = (int)Random.Range(100f, 200f);
+        coinDistanceranBetween = (int)Random.Range(200f, 400f);
+
+        coinScore = PlayerPrefs.GetInt("coinScore");
     }
 
     // Update is called once per frame
@@ -95,6 +106,7 @@ public class GameController : MonoBehaviour
             cloudEistanceBetween++;
             BonusJDistanceBetween++;
             loveDistanceBetween--;
+            coinDistanceBetween--;
             //구름
             if (cloudEistanceBetween > 100)
             {
@@ -110,6 +122,11 @@ public class GameController : MonoBehaviour
                 Instantiate(bonusJelly[Random.Range(0, 4)], new Vector3(9.3f, 10.1f, 0f), Quaternion.identity);
                 Instantiate(bonusJelly[Random.Range(0, 4)], new Vector3(9.3f, 12.1f, 0f), Quaternion.identity);
                 Instantiate(bonusJelly[Random.Range(0, 4)], new Vector3(9.3f, 14.1f, 0f), Quaternion.identity);
+                Instantiate(bonusCoin, new Vector3(10.8f, 7.1f, 0f), Quaternion.identity);
+                Instantiate(bonusCoin, new Vector3(10.8f, 9.1f, 0f), Quaternion.identity);
+                Instantiate(bonusCoin, new Vector3(10.8f, 11.1f, 0f), Quaternion.identity);
+                Instantiate(bonusCoin, new Vector3(10.8f, 13.1f, 0f), Quaternion.identity);
+
             }
         }
         //background
@@ -166,9 +183,10 @@ public class GameController : MonoBehaviour
             loveDistanceBetween++;
             tchDistanceBetween++;
             jellyLetterDistanceBetween++;
+            coinDistanceBetween++;
 
 
-            //장애물 생성(10분의 1확률 && 이전꺼랑 150이상 차이)
+            //장애물 생성(10분의 1확률 && 이전꺼랑s 150이상 차이)
             if (distanceBetween > distanceranBetween)
             {
                 distanceBetween = 0;
@@ -220,13 +238,21 @@ public class GameController : MonoBehaviour
                 jellyLetterranBetween = (int)Random.Range(100f, 200f);
                 Instantiate(jellyLetter[Random.Range(0, 10)]);
             }
-
+            //하트아이템생성
+            if (coinDistanceBetween > coinDistanceranBetween)
+            {
+                coinDistanceBetween = 0;
+                coinDistanceranBetween = (int)Random.Range(200f, 400f);
+                Instantiate(coinObject);
+            }
             score++;//프레임 증가
             if (score % 50 == 0)//젤리 생성
             {
                 Instantiate(JellyPrefab, JellyMakePosition.transform.position, Quaternion.identity);
             }
             jellyScoreText.text = jellyScore.ToString();
+            coinScoreText.text = coinScore.ToString();
+
 
             //인사안했을때 붉은상자
             if (isDanger)
@@ -259,6 +285,7 @@ public class GameController : MonoBehaviour
         DeathScoreText.text = jellyScoreText.text;
         Time.timeScale = 0f;
         Ranking.InsertRank(jellyScore);
+        PlayerPrefs.SetInt("coinScore", coinScore);
         box.Clear();
     }
 }

@@ -15,5 +15,8 @@ EditorBuildSettings:
     path: Assets/Scenes/ExplainGame.unity
     guid: f2d3e6314dbdf164cb447e4937e74eb8
   - enabled: 1
+    path: Assets/Scenes/ShopMenu.unity
+    guid: 99f9aed1153d522418eb75a2dec9699d
+  - enabled: 1
     path: Assets/Scenes/InGame.unity
     guid: d8b38040bf0909743abeff4e8c569886

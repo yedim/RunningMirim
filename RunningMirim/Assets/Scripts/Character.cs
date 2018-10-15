@@ -9,6 +9,7 @@ public class Character : MonoBehaviour
 
     //캐릭터 애니메이션 제어
     private Animator myAnimator;
+    private int uniformNum;//지금 선택된 옷 아이템
 
     //점프
     public bool grounded;
@@ -47,6 +48,8 @@ public class Character : MonoBehaviour
         isTriggerOn = true;
         jumpCnt = 0;
         greetTime = 0f;
+        uniformNum=PlayerPrefs.GetInt("selectCharacter");
+        myAnimator.runtimeAnimatorController = Resources.Load("animator/Character"+uniformNum) as RuntimeAnimatorController;
     }
 
     // Update is called once per frame
@@ -188,6 +191,11 @@ public class Character : MonoBehaviour
                 {
                     HPManager.time = 100f;
                 }
+            }
+            else if (col.transform.tag.Equals("coin"))
+            {
+                GC.coinScore += 50;
+                Destroy(col.gameObject);
             }
             else if (col.transform.tag.Equals("H")) { Destroy(col.gameObject); GC.helloWorldLetter[0].gameObject.SetActive(true); GC.helloJelly[0] = true; }
             else if (col.transform.tag.Equals("E")) { Destroy(col.gameObject); GC.helloWorldLetter[1].gameObject.SetActive(true); GC.helloJelly[1] = true; }

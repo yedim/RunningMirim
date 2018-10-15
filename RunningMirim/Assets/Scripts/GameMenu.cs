@@ -20,6 +20,10 @@ public class GameMenu : MonoBehaviour {
     {
         SceneManager.LoadScene(playGameLevel);
     }
+    public void GotoShop(string playGameLevel)
+    {
+        SceneManager.LoadScene(playGameLevel);
+    }
     public void BackMenu()
     {
         Scene scene = SceneManager.GetActiveScene();
@@ -29,5 +33,10 @@ public class GameMenu : MonoBehaviour {
         int backScene = curScene - 1;
 
         SceneManager.LoadScene(backScene);
+    }
+
+    public void BackMenu_shop()
+    {
+        SceneManager.LoadScene("RankMenu");
     }
 }
